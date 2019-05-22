@@ -1,0 +1,16 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: echo-backend-vs
+spec:
+  hosts:
+  - "echo-backend-service"
+  http:
+  - match:
+    - uri:
+        prefix: /echo
+    route:
+    - destination:
+        port:
+          number: 8080
+        host: echo-backend-service
