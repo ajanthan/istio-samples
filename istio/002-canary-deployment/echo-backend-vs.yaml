@@ -14,3 +14,11 @@ spec:
         port:
           number: 8080
         host: echo-backend-service
+        subset: v1
+      weight: 75
+    - destination:
+        port:
+          number: 8080
+        host: echo-backend-service
+        subset: v2
+      weight: 25
