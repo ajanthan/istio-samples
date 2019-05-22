@@ -17,11 +17,13 @@ func EchoFrontEnd(url string) func(res http.ResponseWriter, req *http.Request) {
 		reply, clientErr := http.Get(url + "/echo/" + input)
 		if clientErr != nil {
 			sendError(500, "Internal error", res)
+			return
 		}
 		if reply.StatusCode == http.StatusOK {
 			_, copyErr := io.Copy(res, reply.Body)
 			if copyErr != nil {
 				sendError(http.StatusInternalServerError, "Copy error", res)
+				return
 			}
 		}
 		sendError(reply.StatusCode, reply.Status, res)
@@ -47,5 +49,5 @@ func EchoBackEnd(version string) func(res http.ResponseWriter, req *http.Request
 
 func sendError(status int, errorMessage string, res http.ResponseWriter) {
 	fmt.Fprint(res, "Internal error")
-	res.WriteHeader(500)
+	res.WriteHeader(status)
 }
