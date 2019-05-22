@@ -1,15 +1,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: echo-backend-deployment
+  name: echo-backend-v1-deployment
 spec:
   selector:
     matchLabels:
       app: echo-backend
+      version: v1
   template:
     metadata:
       labels:
         app: echo-backend
+        version: v1
     spec:
       containers:
       - name: echo-backend
@@ -17,7 +19,7 @@ spec:
         imagePullPolicy: Always
         env:
           - name: APP_VERSION
-            value: 1.0.0
+            value: v1
           - name: APP_PROFILE
             value: backend
         resources:
@@ -38,6 +40,7 @@ spec:
   type: ClusterIP
   selector:
     app: echo-backend
+    version: v1
   ports:
   - port: 8080
     targetPort: 8080
