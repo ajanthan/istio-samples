@@ -16,3 +16,12 @@ spec:
         port:
           number: 8080
         host: echo-frontend-service
+    corsPolicy:
+      allowOrigin:
+      - example.com
+      allowMethods:
+      - GET
+      allowCredentials: false
+      allowHeaders:
+      - X-Foo-Bar
+      maxAge: "24h"
